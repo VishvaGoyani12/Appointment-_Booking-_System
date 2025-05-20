@@ -1,0 +1,65 @@
+﻿@model Appointment__Booking__System.Models.ViewModels.AppointmentViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">@((Model?.Id == 0) ? "Add Appointment" : "Edit Appointment")</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+</div>
+
+<div class="modal-body">
+    <form id="formCreateOrEdit">
+        @Html.AntiForgeryToken()
+        <input asp-for="Id" type="hidden" />
+
+        <div class="form-group mb-3">
+            <label asp-for="PatientId"></label>
+            <select asp-for="PatientId" class="form-control">
+                <option value="">-- Select Patient --</option>
+                @foreach (var patient in ViewBag.Patients as List<SelectListItem>)
+                {
+                    <option value="@patient.Value">@patient.Text</option>
+                }
+            </select>
+            <span asp-validation-for="PatientId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="DoctorId"></label>
+            <select asp-for="DoctorId" class="form-control">
+                <option value="">-- Select Doctor --</option>
+                @foreach (var doctor in ViewBag.Doctors as List<SelectListItem>)
+                {
+                    <option value="@doctor.Value">@doctor.Text</option>
+                }
+            </select>
+            <span asp-validation-for="DoctorId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="AppointmentDate"></label>
+            <input asp-for="AppointmentDate" class="form-control" type="date" />
+            <span asp-validation-for="AppointmentDate" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Status"></label>
+            <select asp-for="Status" class="form-control">
+                <option value="">-- Select Status --</option>
+                <option value="Pending">Pending</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+            <span asp-validation-for="Status" class="text-danger"></span>
+        </div>
+    </form>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+    <button type="submit" form="formCreateOrEdit" class="btn btn-success">Save</button>
+</div>
