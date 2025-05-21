@@ -1,6 +1,7 @@
 ﻿using Appointment__Booking__System.Data;
 using Appointment__Booking__System.Models;
 using Appointment__Booking__System.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Linq.Dynamic.Core.Exceptions;
 
 namespace Appointment__Booking__System.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AppointmentAjaxController : Controller
     {
         private readonly ApplicationDbContext _context;
