@@ -146,7 +146,6 @@ namespace Appointment__Booking__System.Controllers
         {
             if (string.IsNullOrWhiteSpace(email))
             {
-                ModelState.AddModelError("", "Email is required.");
                 return View();
             }
 
